@@ -8,8 +8,8 @@ const homeRoute = [
     component: HomePage,
     children: [
       {
-        path: 'table',
-        loadChildren: './acc-table/acc-table.module#AccTablePageModule'
+        path: 'dashboard',
+        loadChildren: './acc-dash/acc-dash.module#AccDashPageModule'
       },
       {
         path: 'stats',
@@ -26,12 +26,17 @@ const homeRoute = [
       {
         path: 'settings',
         loadChildren: './acc-settings/acc-settings.module#AccSettingsPageModule'
+      },
+      {
+        path: '',
+        redirectTo: '/home/userId/dashboard',
+        pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home/userId/table',
+    redirectTo: '/home/userId/dashboard',
     pathMatch: 'full'
   }
 ];

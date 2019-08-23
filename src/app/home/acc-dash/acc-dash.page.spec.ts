@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccTablePage } from './acc-table.page';
+import { AccDashPage } from './acc-dash.page';
 
-describe('AccTablePage', () => {
-  let component: AccTablePage;
-  let fixture: ComponentFixture<AccTablePage>;
+describe('AccDashPage', () => {
+  let component: AccDashPage;
+  let fixture: ComponentFixture<AccDashPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccTablePage ],
+      declarations: [ AccDashPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccTablePage);
+    fixture = TestBed.createComponent(AccDashPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
