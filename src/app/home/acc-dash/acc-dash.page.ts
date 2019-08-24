@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { ModalController } from '@ionic/angular';
 import { Transaction } from './acc-dash.model';
@@ -11,18 +11,21 @@ import { AccDashService } from './acc-dash.service';
 })
 export class AccDashPage implements OnInit {
 
-  displayedColumns: string[] = ['Date', 'Type', 'Category', 'Amount', 'Description'];
+  displayedColumns: string[] = ['Date', 'Type', 'Category', 'Amount'];
   dataSource: Transaction[];
 
   constructor(
     private modalCtrl: ModalController,
     private accdashService: AccDashService
   ) {
-    this.dataSource = this.accdashService.transaction;
-    console.log(this.dataSource);
+
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.dataSource = this.accdashService.transaction;
   }
 
   addStatement() {
@@ -31,6 +34,11 @@ export class AccDashPage implements OnInit {
     }).then(
       transacPage => {
         transacPage.present();
+        return transacPage.onDidDismiss();
+      }
+    ).then(
+      pageResponse => {
+        this.dataSource = this.accdashService.transaction;
       }
     )
   }

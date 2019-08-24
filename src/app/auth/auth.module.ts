@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [AuthPage]
 })
-export class AuthPageModule {}
+export class AuthPageModule { }

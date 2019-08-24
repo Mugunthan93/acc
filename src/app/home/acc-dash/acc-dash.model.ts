@@ -1,10 +1,22 @@
 export class Transaction {
     constructor(
-        public Date: string,
+        public Date: Date,
         public Type: string,
         public Category: string,
-        public Amount: number,
-        public Description: string
+        public Amount: string
+    ) {
+
+    }
+}
+
+export class Transaction2 {
+    constructor(
+        public Date: Date,
+        public Type: string,
+        public Category: string,
+        public Amount: string,
+        public Description: string,
+        public UserId: string
     ) {
 
     }

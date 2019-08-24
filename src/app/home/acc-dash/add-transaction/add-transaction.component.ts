@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { AccDashService } from '../acc-dash.service';
 
 @Component({
   selector: 'app-add-transaction',
@@ -13,15 +15,22 @@ export class AddTransactionComponent implements OnInit {
 
   Categories: string[] = ['Income', 'Expense', 'Liabilities', 'Assets'];
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController,
+    private accdashService: AccDashService
+  ) { }
 
   ngOnInit() {
     this.addTransaction = new FormGroup({
-      'Date': new FormControl(),
-      'Type': new FormControl(),
-      'Category': new FormControl(),
-      'Amount': new FormControl(),
-      'Description': new FormControl()
+      'tabledata': new FormGroup({
+        'Date': new FormControl(),
+        'Type': new FormControl(),
+        'Category': new FormControl(),
+        'Amount': new FormControl(),
+      }),
+      'otherdata': new FormGroup({
+        'Description': new FormControl()
+      })
     });
   }
 
@@ -30,10 +39,12 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onCancel() {
-
+    this.modalCtrl.dismiss();
   }
 
   onAddTransaction() {
+    this.accdashService.addTransaction(this.addTransaction.value.tabledata);
+    this.modalCtrl.dismiss();
     console.log(this.addTransaction);
   }
 
