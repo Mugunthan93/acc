@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { AccDashService } from '../acc-dash.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class AddTransactionComponent implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private accdashService: AccDashService
+    private accdashService: AccDashService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -43,9 +44,22 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onAddTransaction() {
-    this.accdashService.addTransaction(this.addTransaction.value.tabledata);
+    this.accdashService.addTransaction(
+      '06',
+      this.addTransaction.value.tabledata.Date,
+      this.addTransaction.value.tabledata.Type,
+      this.addTransaction.value.tabledata.Category,
+      this.addTransaction.value.tabledata.Amount,
+      this.addTransaction.value.otherdata.Description,
+      'abc'
+    );
     this.modalCtrl.dismiss();
-    console.log(this.addTransaction);
+    this.loadingCtrl.create({
+      message: 'Transaction adding...'
+    }).then((loadingEl) => {
+      loadingEl.present();
+      return loadingEl.onDidDismiss();
+    });
   }
 
 

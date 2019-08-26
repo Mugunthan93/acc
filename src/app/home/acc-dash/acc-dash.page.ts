@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
-import { ModalController } from '@ionic/angular';
-import { Transaction } from './acc-dash.model';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { Transactions } from './acc-dash.model';
 import { AccDashService } from './acc-dash.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-acc-dash',
@@ -12,20 +13,23 @@ import { AccDashService } from './acc-dash.service';
 export class AccDashPage implements OnInit {
 
   displayedColumns: string[] = ['Date', 'Type', 'Category', 'Amount'];
-  dataSource: Transaction[];
+  dataSource: Transactions[];
+  private transacSub: Subscription;
 
   constructor(
     private modalCtrl: ModalController,
-    private accdashService: AccDashService
+    private accdashService: AccDashService,
+    private loadingCtrl: LoadingController
   ) {
 
   }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-    this.dataSource = this.accdashService.transaction;
+    this.transacSub = this.accdashService.transactions.subscribe(
+      (Transactions) => {
+        this.dataSource = Transactions;
+      }
+    );
   }
 
   addStatement() {
@@ -38,9 +42,19 @@ export class AccDashPage implements OnInit {
       }
     ).then(
       pageResponse => {
-        this.dataSource = this.accdashService.transaction;
+        this.transacSub = this.accdashService.transactions.subscribe(
+          (Transactions) => {
+            this.dataSource = Transactions;
+          }
+        );
       }
     )
+  }
+
+  ngOnDestroy() {
+    if (this.transacSub) {
+      this.transacSub.unsubscribe();
+    }
   }
 
 }
