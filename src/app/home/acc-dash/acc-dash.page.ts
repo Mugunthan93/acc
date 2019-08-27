@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class AccDashPage implements OnInit {
 
-  displayedColumns: string[] = ['Date', 'Type', 'Category', 'Amount'];
+  displayedColumns: string[] = ['Date', 'Name', 'Type', 'Category', 'Amount'];
   dataSource: Transactions[];
   private transacSub: Subscription;
 
@@ -32,6 +32,10 @@ export class AccDashPage implements OnInit {
     );
   }
 
+  ionViewWillEnter() {
+    this.accdashService.fetchTransactions().subscribe();
+  }
+
   addStatement() {
     this.modalCtrl.create({
       component: AddTransactionComponent
@@ -49,6 +53,10 @@ export class AccDashPage implements OnInit {
         );
       }
     )
+  }
+
+  onEdit() {
+
   }
 
   ngOnDestroy() {

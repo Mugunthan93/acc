@@ -26,6 +26,18 @@
                 </ion-row>
                 <ion-row>
                     <ion-col size="4">
+                        <ion-item lines="none">Name</ion-item>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item lines="none">
+                            <mat-form-field class="example-full-width">
+                                <input type="text" matInput formControlName="Name">
+                            </mat-form-field>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="4">
                         <ion-item lines="none">Type</ion-item>
                     </ion-col>
                     <ion-col>
@@ -61,7 +73,7 @@
                     <ion-col>
                         <ion-item lines="none">
                             <mat-form-field class="example-full-width">
-                                <input matInput formControlName="Amount">
+                                <input type="number" matInput formControlName="Amount">
                             </mat-form-field>
                         </ion-item>
                     </ion-col>

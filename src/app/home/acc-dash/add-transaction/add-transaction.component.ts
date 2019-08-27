@@ -25,6 +25,7 @@ export class AddTransactionComponent implements OnInit {
     this.addTransaction = new FormGroup({
       'tabledata': new FormGroup({
         'Date': new FormControl(),
+        'Name': new FormControl(),
         'Type': new FormControl(),
         'Category': new FormControl(),
         'Amount': new FormControl(),
@@ -46,6 +47,7 @@ export class AddTransactionComponent implements OnInit {
   onAddTransaction() {
     this.accdashService.addTransaction(
       '06',
+      this.addTransaction.value.tabledata.Name,
       this.addTransaction.value.tabledata.Date,
       this.addTransaction.value.tabledata.Type,
       this.addTransaction.value.tabledata.Category,

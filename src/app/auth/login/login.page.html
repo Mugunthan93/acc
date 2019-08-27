@@ -1,0 +1,15 @@
+<ion-card>
+    <ion-card-content>
+        <form [formGroup]="login" (ngSubmit)="onLogin()">
+            <ion-item lines="none">
+                <ion-label position="floating">E-mail</ion-label>
+                <ion-input formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+                <ion-label position="floating">Password</ion-label>
+                <ion-input formControlName="password"></ion-input>
+            </ion-item>
+            <ion-button expand="block" fill="solid" type="submit">Login</ion-button>
+        </form>
+    </ion-card-content>
+</ion-card>

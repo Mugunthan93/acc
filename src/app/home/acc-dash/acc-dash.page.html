@@ -10,21 +10,17 @@
 <ion-content>
   <ion-card>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" padding>
-
-      <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
       <ion-row matColumnDef="Date">
-        <ion-col>
-          <th mat-header-cell *matHeaderCellDef> Date</th>
-        </ion-col>
-        <ion-col>
-          <td mat-cell *matCellDef="let element"> {{element.Date | date:'shortDate'}} </td>
-        </ion-col>
+        <th mat-header-cell *matHeaderCellDef> Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.Date | date:'shortDate'}} </td>
       </ion-row>
 
-      <!-- Name Column -->
+      <ion-row matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element">{{element.Name}}
+        </td>
+      </ion-row>
+
       <ion-row matColumnDef="Type">
         <th mat-header-cell *matHeaderCellDef> Type </th>
         <td mat-cell *matCellDef="let element">
@@ -32,23 +28,20 @@
         </td>
       </ion-row>
 
-      <!-- Weight Column -->
       <ion-row matColumnDef="Category">
         <th mat-header-cell *matHeaderCellDef> Category </th>
         <td mat-cell *matCellDef="let element"> {{element.Category}} </td>
       </ion-row>
 
-      <!-- Symbol Column -->
       <ion-row matColumnDef="Amount">
         <th mat-header-cell *matHeaderCellDef> Amount </th>
         <td mat-cell *matCellDef="let element"> {{element.Amount}} </td>
       </ion-row>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </ion-card>
-
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button mat-raised-button size="small" (click)="addStatement()">
       <ion-icon name="add"></ion-icon>
