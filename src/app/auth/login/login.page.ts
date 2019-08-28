@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +14,13 @@ export class LoginPage implements OnInit {
 
   login: FormGroup;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private loadingCtrl: LoadingController,
+    private router: Router,
+    private alertCtrl: AlertController
+
+  ) { }
 
   ngOnInit() {
     this.login = new FormGroup({
@@ -21,6 +31,38 @@ export class LoginPage implements OnInit {
 
   onLogin() {
     console.log(this.login.value);
+    this.loadingCtrl.create({
+      message: 'Signing up...'
+    }).then(
+      (loadingEl) => {
+        loadingEl.present();
+
+        let obs: Observable<AuthResponseData>;
+        obs = this.authService.signup(this.login.value.email, this.login.value.password)
+        obs.subscribe(
+          (resData) => {
+            console.log(resData);
+            loadingEl.dismiss();
+            this.router.navigateByUrl('/home/user/dashboard');
+          },
+          (error) => {
+            console.log(error);
+            loadingEl.dismiss();
+            this.alertCtrl.create(
+              {
+                header: 'Signup Failed',
+                message: error.error.error.message,
+                buttons: ['okay']
+              }
+            ).then(
+              (alertEl) => {
+                alertEl.present();
+              }
+            );
+          }
+        );
+      }
+    );
   }
 
 }

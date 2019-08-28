@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Transactions } from './acc-dash.model';
 import { AuthService } from 'src/app/auth/auth.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { take, map, delay, tap, switchMap } from 'rxjs/operators'
 import { LoadingController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
@@ -82,25 +82,33 @@ export class AccDashService {
   addTransaction(Id: string, Name: string, date: Date, Type: string, Category: string, Amount: number, Description: string, UserId: string) {
 
     let generatedId: string;
+    let newTransaction: Transactions;
 
-    const newTransaction = new Transactions(
-      Math.random().toString(),
-      Name,
-      date,
-      Type,
-      Category,
-      Amount,
-      Description,
-      this.authService.userId
-    );
-
-    return this.http.post<{ Name: string }>
-      (
-        'https://ionic-acc.firebaseio.com/transactions.json',
-        { ...newTransaction, id: null }
-      ).
-      pipe(
+    this.authService.userId
+      .pipe(
+        take(1),
         switchMap(
+          (userId) => {
+            if (!userId) {
+              throw new Error('No user Id');
+            }
+            newTransaction = new Transactions(
+              Math.random().toString(),
+              Name,
+              date,
+              Type,
+              Category,
+              Amount,
+              Description,
+              UserId
+            );
+            return this.http.post<{ Name: string }>
+              (
+                'https://ionic-acc.firebaseio.com/transactions.json',
+                { ...newTransaction, id: null }
+              )
+          }
+        ), switchMap(
           (resData) => {
             generatedId = resData.Name;
             return this.transactions;
