@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthResponseData } from '../auth.model';
 
 @Component({
   selector: 'app-login',
@@ -32,20 +33,20 @@ export class LoginPage implements OnInit {
   onLogin() {
     console.log(this.login.value);
     this.loadingCtrl.create({
-      message: 'Signing up...'
+      message: 'Logging up...'
     }).then(
       (loadingEl) => {
         loadingEl.present();
 
         let obs: Observable<AuthResponseData>;
-        obs = this.authService.signup(this.login.value.email, this.login.value.password)
+        obs = this.authService.login(this.login.value.email, this.login.value.password)
         obs.subscribe(
-          (resData) => {
+          resData => {
             console.log(resData);
             loadingEl.dismiss();
             this.router.navigateByUrl('/home/user/dashboard');
           },
-          (error) => {
+          error => {
             console.log(error);
             loadingEl.dismiss();
             this.alertCtrl.create(

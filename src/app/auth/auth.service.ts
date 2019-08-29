@@ -39,7 +39,7 @@ export class AuthService {
         map(
           (user) => {
             if (user) {
-              return !!user.id;
+              return user.id;
             }
             else {
               return null;
@@ -60,9 +60,9 @@ export class AuthService {
     )
       .pipe(
         tap(
-          this.setUserDate.bind(this)
+          this.setUserData.bind(this)
         )
-      )
+      );
   }
 
   login(email: string, password: string) {
@@ -76,21 +76,21 @@ export class AuthService {
     )
       .pipe(
         tap(
-          this.setUserDate.bind(this)
+          this.setUserData.bind(this)
         )
-      )
+      );
   }
 
   logout() {
     this._user.next(null);
   }
 
-  private setUserDate(resData) {
-    const expDate = new Date(new Date().getTime() + (+resData.tokenExpirationDate * 1000));
+  private setUserData(resData: AuthResponseData) {
+    const expDate = new Date(new Date().getTime() + (+resData.expiresIn * 1000));
     this._user.next(new User(
-      resData.id,
+      resData.localId,
       resData.email,
-      resData._token,
+      resData.idToken,
       expDate
     ));
   }

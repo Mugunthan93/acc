@@ -4,6 +4,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { Transactions } from './acc-dash.model';
 import { AccDashService } from './acc-dash.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-acc-dash',
@@ -13,13 +14,14 @@ import { Subscription } from 'rxjs';
 export class AccDashPage implements OnInit {
 
   displayedColumns: string[] = ['Date', 'Name', 'Type', 'Category', 'Amount'];
-  dataSource: Transactions[];
+  transactions: Transactions[];
   private transacSub: Subscription;
 
   constructor(
     private modalCtrl: ModalController,
     private accdashService: AccDashService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private authService: AuthService
   ) {
 
   }
@@ -27,7 +29,7 @@ export class AccDashPage implements OnInit {
   ngOnInit() {
     this.transacSub = this.accdashService.transactions.subscribe(
       (Transactions) => {
-        this.dataSource = Transactions;
+        this.transactions = Transactions;
       }
     );
   }
@@ -48,7 +50,7 @@ export class AccDashPage implements OnInit {
       pageResponse => {
         this.transacSub = this.accdashService.transactions.subscribe(
           (Transactions) => {
-            this.dataSource = Transactions;
+            this.transactions = Transactions;
           }
         );
       }

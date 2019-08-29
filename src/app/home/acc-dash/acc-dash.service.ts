@@ -89,8 +89,9 @@ export class AccDashService {
         take(1),
         switchMap(
           (userId) => {
+            console.log(userId);
             if (!userId) {
-              throw new Error('No user Id');
+              throw new Error('No user Id ');
             }
             newTransaction = new Transactions(
               Math.random().toString(),
@@ -100,7 +101,7 @@ export class AccDashService {
               Category,
               Amount,
               Description,
-              UserId
+              userId
             );
             return this.http.post<{ Name: string }>
               (
@@ -110,6 +111,7 @@ export class AccDashService {
           }
         ), switchMap(
           (resData) => {
+            console.log(resData);
             generatedId = resData.Name;
             return this.transactions;
           }
@@ -117,6 +119,7 @@ export class AccDashService {
         take(1),
         tap(
           (transactions) => {
+            console.log(transactions);
             newTransaction.Id = generatedId;
             this._transactions.next(
               transactions.concat(newTransaction)
@@ -125,6 +128,7 @@ export class AccDashService {
       ).
       subscribe(
         (respData) => {
+          console.log(respData);
           this.loadingCtrl.dismiss();
         }
       );
