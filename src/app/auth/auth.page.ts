@@ -17,10 +17,5 @@ export class AuthPage implements OnInit {
   ngOnInit() {
   }
 
-  onLogin() {
-    this.authService.login();
-    this.router.navigateByUrl('/home/user/dashboard');
-  }
-
 
 }

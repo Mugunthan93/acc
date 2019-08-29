@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthResponseData } from '../auth.model';
 
 @Component({
   selector: 'app-signup',
