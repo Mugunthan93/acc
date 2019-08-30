@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Transactions } from './acc-dash.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BehaviorSubject, throwError } from 'rxjs';
-import { take, map, delay, tap, switchMap } from 'rxjs/operators'
+import { take, map, tap, switchMap } from 'rxjs/operators'
 import { LoadingController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,6 +23,7 @@ interface transactionData {
 export class AccDashService {
 
   private _transactions = new BehaviorSubject<Transactions[]>([]);
+  userId: string;
 
   constructor(
     private authService: AuthService,
@@ -35,8 +36,17 @@ export class AccDashService {
   }
 
   fetchTransactions() {
-    return this.http.get<{ [keys: string]: transactionData }>('https://ionic-acc.firebaseio.com/transactions.json')
+    return this.authService.userId
       .pipe(
+        switchMap(
+          (userId) => {
+            if (!userId) {
+              throw new Error('User not found');
+            }
+            return this.http.get<{ [keys: string]: transactionData }>(
+              `https://ionic-acc.firebaseio.com/transactions.json?orderBy="UserId"&startAt="a"`
+            )
+          }),
         map((resData) => {
           console.log(resData);
           const transactions = [];

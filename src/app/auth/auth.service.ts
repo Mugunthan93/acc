@@ -5,6 +5,9 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from './auth.model';
 import { map, tap } from 'rxjs/operators';
 import { AuthResponseData } from './auth.model'
+import { Plugins } from '@capacitor/core';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -93,5 +96,19 @@ export class AuthService {
       resData.idToken,
       expDate
     ));
+    this.storeAuthData(resData.localId, resData.idToken, expDate.toISOString())
+  }
+
+  private storeAuthData(userId: string, token: string, tokenExpDate: string) {
+    const data = JSON.stringify({
+      userId: userId,
+      token: token,
+      tokenExpDate: tokenExpDate
+    });
+    Plugins.Storage.set({
+      key: 'AuthData',
+      value: data
+    });
+
   }
 }
