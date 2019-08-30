@@ -4,7 +4,7 @@ import { HomePage } from './home.page';
 
 const homeRoute = [
   {
-    path: 'user',
+    path: ':user',
     component: HomePage,
     children: [
       {
@@ -29,14 +29,14 @@ const homeRoute = [
       },
       {
         path: '',
-        redirectTo: '/home/user/dashboard',
+        redirectTo: '/home/:user/dashboard',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home/user/dashboard',
+    redirectTo: '/home/:user/dashboard',
     pathMatch: 'full'
   }
 ];

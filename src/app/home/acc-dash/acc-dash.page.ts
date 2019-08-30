@@ -35,9 +35,7 @@ export class AccDashPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.accdashService.fetchTransactions().subscribe(
-      (resData) => console.log(resData)
-    );
+    this.accdashService.fetchTransactions().subscribe();
   }
 
   addStatement() {

@@ -38,17 +38,17 @@ export class AccDashService {
   fetchTransactions() {
     return this.authService.userId
       .pipe(
+        take(1),
         switchMap(
           (userId) => {
             if (!userId) {
               throw new Error('User not found');
             }
             return this.http.get<{ [keys: string]: transactionData }>(
-              `https://ionic-acc.firebaseio.com/transactions.json?orderBy="UserId"&startAt="a"`
+              `https://ionic-acc.firebaseio.com/transactions.json?orderBy="UserId"&equalTo="${userId}"`
             )
           }),
         map((resData) => {
-          console.log(resData);
           const transactions = [];
           for (const key in resData) {
             if (resData.hasOwnProperty(key)) {
@@ -79,6 +79,7 @@ export class AccDashService {
       .pipe(
         take(1), map(
           (transactions) => {
+            console.log(transactions);
             return {
               ...transactions.find(
                 p => p.Id === id

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { User } from './auth.model';
 import { map, tap } from 'rxjs/operators';
 import { AuthResponseData } from './auth.model'
@@ -17,6 +17,50 @@ export class AuthService {
 
 
   constructor(private http: HttpClient) { }
+
+  autoLogin() {
+    return from(Plugins.Storage.get({
+      key: 'AuthData'
+    }))
+      .pipe(
+        map(
+          (storedData) => {
+            if (!storedData || !storedData.value) {
+              return null;
+            }
+            const parsedData = JSON.parse(storedData.value) as {
+              token: string;
+              tokenExpDate: string;
+              userId: string;
+              email: string;
+            };
+            const expTime = new Date(parsedData.tokenExpDate);
+            if (expTime <= new Date()) {
+              return null;
+            }
+            const user = new User(
+              parsedData.userId,
+              parsedData.email,
+              parsedData.token,
+              expTime
+            );
+            return user;
+          }
+        ),
+        tap(
+          (user) => {
+            if (user) {
+              this._user.next(user);
+            }
+          }
+        ),
+        map(
+          (user) => {
+            return !!user;
+          }
+        )
+      );
+  }
 
   get userIsAuthenticated() {
     return this._user
@@ -86,6 +130,9 @@ export class AuthService {
 
   logout() {
     this._user.next(null);
+    Plugins.Storage.remove({
+      key: 'AuthData'
+    });
   }
 
   private setUserData(resData: AuthResponseData) {
@@ -96,14 +143,15 @@ export class AuthService {
       resData.idToken,
       expDate
     ));
-    this.storeAuthData(resData.localId, resData.idToken, expDate.toISOString())
+    this.storeAuthData(resData.localId, resData.idToken, expDate.toISOString(), resData.email)
   }
 
-  private storeAuthData(userId: string, token: string, tokenExpDate: string) {
+  private storeAuthData(userId: string, token: string, tokenExpDate: string, email: string) {
     const data = JSON.stringify({
       userId: userId,
       token: token,
-      tokenExpDate: tokenExpDate
+      tokenExpDate: tokenExpDate,
+      email: email
     });
     Plugins.Storage.set({
       key: 'AuthData',

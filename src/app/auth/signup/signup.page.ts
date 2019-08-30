@@ -50,6 +50,7 @@ export class SignupPage implements OnInit {
             console.log(resData);
             loadingEl.dismiss();
             this.router.navigateByUrl('/home/user/dashboard');
+            this.signup.reset();
           },
           (error) => {
             console.log(error);
