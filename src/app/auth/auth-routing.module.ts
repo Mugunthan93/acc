@@ -5,21 +5,21 @@ import { AuthPage } from './auth.page';
 
 const authRoute: Routes = [
   {
-    path: 'enter',
+    path: '',
     component: AuthPage,
     children: [
       { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
       { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
       {
         path: '',
-        redirectTo: '/auth/enter/signup',
+        redirectTo: '/auth/signup',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/auth/enter/signup',
+    redirectTo: '/auth/signup',
     pathMatch: 'full'
   }
 ];

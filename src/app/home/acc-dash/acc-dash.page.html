@@ -39,10 +39,20 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+</ion-content>
+<ion-footer>
+  <ion-item color="success">
+    <ion-text>
+      Total
+    </ion-text>:
+    <ion-text>
+      {{total | currency:'INR' }}
+    </ion-text>
+  </ion-item>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button mat-raised-button size="small" (click)="addStatement()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-</ion-content>
+</ion-footer>

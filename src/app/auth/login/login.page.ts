@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
           resData => {
             console.log(resData);
             loadingEl.dismiss();
-            this.router.navigateByUrl('/home/user/dashboard');
+            this.router.navigateByUrl('/home/dashboard');
             this.login.reset();
           },
           error => {

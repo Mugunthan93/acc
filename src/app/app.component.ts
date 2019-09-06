@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authSub = this.authService.userIsAuthenticated.subscribe(
       isAuth => {
         if (!isAuth && this.previousAuthState !== isAuth) {
-          this.router.navigateByUrl('/auth/enter/signup');
+          this.router.navigateByUrl('/auth/signup');
         }
         this.previousAuthState = isAuth;
       }
