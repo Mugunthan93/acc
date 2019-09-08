@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, ɵConsole } from '@angular/core';
-import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { Transactions } from './acc-dash.model';
 import { AccDashService } from './acc-dash.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { AddTransactionPage } from './add-transaction/add-transaction.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-acc-dash',
@@ -21,7 +22,8 @@ export class AccDashPage implements OnInit {
     private modalCtrl: ModalController,
     private accdashService: AccDashService,
     private loadingCtrl: LoadingController,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: Router
   ) {
 
   }
@@ -50,22 +52,23 @@ export class AccDashPage implements OnInit {
   }
 
   addStatement() {
-    this.modalCtrl.create({
-      component: AddTransactionComponent
-    }).then(
-      transacPage => {
-        transacPage.present();
-        return transacPage.onDidDismiss();
-      }
-    ).then(
-      pageResponse => {
-        this.transacSub = this.accdashService.transactions.subscribe(
-          (Transactions) => {
-            this.transactions = Transactions;
-          }
-        );
-      }
-    )
+    this.route.navigateByUrl('/home/add');
+    // this.modalCtrl.create({
+    //   component: AddTransactionPage
+    // }).then(
+    //   transacPage => {
+    //     transacPage.present();
+    //     return transacPage.onDidDismiss();
+    //   }
+    // ).then(
+    //   pageResponse => {
+    //     this.transacSub = this.accdashService.transactions.subscribe(
+    //       (Transactions) => {
+    //         this.transactions = Transactions;
+    //       }
+    //     );
+    //   }
+    // )
   }
 
   onEdit() {

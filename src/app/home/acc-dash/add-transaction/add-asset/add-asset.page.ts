@@ -1,24 +1,20 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ModalController, LoadingController } from '@ionic/angular';
-import { AccDashService } from '../acc-dash.service';
+import { Router } from '@angular/router';
+import { AccDashService } from '../../acc-dash.service';
 
 @Component({
-  selector: 'app-add-transaction',
-  templateUrl: './add-transaction.component.html',
-  styleUrls: ['./add-transaction.component.scss'],
+  selector: 'app-add-asset',
+  templateUrl: './add-asset.page.html',
+  styleUrls: ['./add-asset.page.scss'],
 })
-
-export class AddTransactionComponent implements OnInit {
+export class AddAssetPage implements OnInit {
 
   addTransaction: FormGroup;
 
-  Categories: string[] = ['Income', 'Expense', 'Liabilities', 'Assets'];
-
   constructor(
-    private modalCtrl: ModalController,
-    private accdashService: AccDashService,
-    private loadingCtrl: LoadingController
+    private route: Router,
+    private accdashService: AccDashService
   ) { }
 
   ngOnInit() {
@@ -36,12 +32,8 @@ export class AddTransactionComponent implements OnInit {
     });
   }
 
-  ionViewWillEnter() {
-
-  }
-
   onCancel() {
-    this.modalCtrl.dismiss();
+    this.route.navigate(['/home/dashboard']);
   }
 
   onAddTransaction() {
@@ -55,14 +47,6 @@ export class AddTransactionComponent implements OnInit {
       this.addTransaction.value.otherdata.Description,
       'abc'
     );
-    this.modalCtrl.dismiss();
-    this.loadingCtrl.create({
-      message: 'Transaction adding...'
-    }).then((loadingEl) => {
-      loadingEl.present();
-      return loadingEl.onDidDismiss();
-    });
+    this.route.navigate(['/home/dashboard']);
   }
-
-
 }

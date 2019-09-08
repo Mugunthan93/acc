@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Transaction</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="income">
+        <ion-label>Income</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="expense">
+        <ion-label>Expense</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="liability">
+        <ion-label>Liability</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="asset">
+        <ion-label>Asset</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

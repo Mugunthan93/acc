@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
+import { AddTransactionPage } from './acc-dash/add-transaction/add-transaction.page';
 
 const homeRoute = [
   {
@@ -35,6 +36,10 @@ const homeRoute = [
     ]
   },
   {
+    path: 'add',
+    loadChildren: './acc-dash/add-transaction/add-transaction.module#AddTransactionPageModule'
+  },
+  {
     path: '',
     redirectTo: '/home/dashboard',
     pathMatch: 'full'
@@ -43,7 +48,9 @@ const homeRoute = [
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     RouterModule.forChild(homeRoute)
   ],
