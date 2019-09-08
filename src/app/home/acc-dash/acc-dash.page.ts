@@ -5,7 +5,6 @@ import { Transactions } from './acc-dash.model';
 import { AccDashService } from './acc-dash.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-acc-dash',
@@ -14,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AccDashPage implements OnInit {
 
-  displayedColumns: string[] = ['Date', 'Name', 'Type', 'Category', 'Amount'];
   transactions: Transactions[];
   private transacSub: Subscription;
   total: number = 0;
