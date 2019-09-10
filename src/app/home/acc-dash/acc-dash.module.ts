@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { AccDashPage } from './acc-dash.page';
 import { AccDashRoutingModule } from './acc-dash-routing.module';
-import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 
 import { AccDashMaterialModule } from './acc-dash-material.module';
 
@@ -21,8 +20,7 @@ import { AccDashMaterialModule } from './acc-dash-material.module';
   ],
   declarations: [
     AccDashPage,
-    AddTransactionComponent
   ],
-  entryComponents: [AddTransactionComponent]
+  entryComponents: []
 })
 export class AccDashPageModule { }

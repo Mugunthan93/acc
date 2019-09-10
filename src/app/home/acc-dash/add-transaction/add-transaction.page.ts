@@ -1,15 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { AccDashService } from '../acc-dash.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-transaction',
-  templateUrl: './add-transaction.component.html',
-  styleUrls: ['./add-transaction.component.scss'],
+  templateUrl: './add-transaction.page.html',
+  styleUrls: ['./add-transaction.page.scss'],
 })
-
-export class AddTransactionComponent implements OnInit {
+export class AddTransactionPage implements OnInit {
 
   addTransaction: FormGroup;
 
@@ -18,7 +18,8 @@ export class AddTransactionComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private accdashService: AccDashService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onCancel() {
-    this.modalCtrl.dismiss();
+    this.route.navigate(['home', 'dashboard']);
   }
 
   onAddTransaction() {
@@ -63,6 +64,5 @@ export class AddTransactionComponent implements OnInit {
       return loadingEl.onDidDismiss();
     });
   }
-
 
 }

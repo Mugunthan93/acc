@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTransactionComponent } from './add-transaction.component';
+import { AddAssetPage } from './add-asset.page';
 
-describe('AddTransactionComponent', () => {
-  let component: AddTransactionComponent;
-  let fixture: ComponentFixture<AddTransactionComponent>;
+describe('AddAssetPage', () => {
+  let component: AddAssetPage;
+  let fixture: ComponentFixture<AddAssetPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTransactionComponent ],
+      declarations: [ AddAssetPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddTransactionComponent);
+    fixture = TestBed.createComponent(AddAssetPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

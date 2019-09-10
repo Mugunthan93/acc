@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 
-const homeRoute = [
+const homeRoute: Routes = [
   {
     path: '',
     component: HomePage,
@@ -33,6 +33,10 @@ const homeRoute = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'add',
+    loadChildren: './acc-dash/add-transaction/add-transaction.module#AddTransactionPageModule'
   },
   {
     path: '',
