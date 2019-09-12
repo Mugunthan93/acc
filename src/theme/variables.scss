@@ -28,6 +28,9 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+//fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/

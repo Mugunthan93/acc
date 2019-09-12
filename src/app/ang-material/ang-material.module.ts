@@ -33,4 +33,4 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule
   ]
 })
-export class AccDashMaterialModule { }
+export class AngMaterialModule { }

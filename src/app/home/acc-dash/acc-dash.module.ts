@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { AccDashPage } from './acc-dash.page';
 import { AccDashRoutingModule } from './acc-dash-routing.module';
 
-import { AccDashMaterialModule } from './acc-dash-material.module';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +14,6 @@ import { AccDashMaterialModule } from './acc-dash-material.module';
     ReactiveFormsModule,
     IonicModule,
     AccDashRoutingModule,
-    AccDashMaterialModule,
   ],
   declarations: [
     AccDashPage,
