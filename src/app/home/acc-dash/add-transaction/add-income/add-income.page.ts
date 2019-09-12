@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-income',
@@ -10,9 +10,15 @@ export class AddIncomePage implements OnInit {
 
   addIncome: FormGroup;
 
+  incomeType = ["active", "passive", "portfolio"];
+
   constructor() { }
 
   ngOnInit() {
+    this.addIncome = new FormGroup({
+      'Date': new FormControl(null),
+      'Type': new FormControl("active")
+    });
   }
 
 }
