@@ -1,7 +1,8 @@
 {
   "name": "acc",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

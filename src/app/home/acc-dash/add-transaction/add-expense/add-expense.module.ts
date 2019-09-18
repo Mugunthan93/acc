@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
 import { AddExpensePage } from './add-expense.page';
+import { AngMaterialModule } from 'src/app/ang-material/ang-material.module';
 
 const routes: Routes = [
   {
@@ -18,9 +19,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    AngMaterialModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AddExpensePage]
 })
-export class AddExpensePageModule {}
+export class AddExpensePageModule { }

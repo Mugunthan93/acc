@@ -3,8 +3,9 @@ import { Transactions } from './acc-dash.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { take, map, tap, switchMap } from 'rxjs/operators'
-import { LoadingController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 interface transactionData {
   Amount: number
@@ -28,6 +29,7 @@ export class AccDashService {
   constructor(
     private authService: AuthService,
     private http: HttpClient,
+    private route: Router,
     private loadingCtrl: LoadingController
   ) { }
 
@@ -90,7 +92,7 @@ export class AccDashService {
       );
   }
 
-  addTransaction(Id: string, Name: string, date: Date, Type: string, Category: string, Amount: number, Description: string, UserId: string) {
+  addTransaction(Name: string, date: Date, Type: string, Category: string, Amount: number, Description: string) {
 
     let generatedId: string;
     let newTransaction: Transactions;
@@ -141,65 +143,9 @@ export class AccDashService {
         (respData) => {
           console.log(respData);
           this.loadingCtrl.dismiss();
+          this.route.navigate(['home', 'dashboard']);
         }
       );
-
-    // this.transactions
-    //   .pipe(
-    //     take(1),
-    //     delay(5000)
-    //   ).
-    //   subscribe(
-    //     (transactions) => {
-    //       this._transactions.next(
-    //         transactions.concat(newTransaction)
-    //       );
-    //       this.loadingCtrl.dismiss();
-    //     }
-    //   );
   }
 
 }
-
-
-
-// {
-//   Id: '01',
-//     Name: 'hari',
-//       Date: new Date('Thu Aug 08 2019 00:00:00 GMT+0530 (India Standard Time)'),
-//         Type: 'Paid',
-//           Category: 'Expenses',
-//             Amount: 1000,
-//               Description: 'regxdgxdg',
-//                 UserId: 'abc'
-// },
-// {
-//   Id: '02',
-//     Name: 'hari',
-//       Date: new Date('Thu Aug 08 2019 00:00:00 GMT+0530 (India Standard Time)'),
-//         Type: 'Paid',
-//           Category: 'Expenses',
-//             Amount: 1000,
-//               Description: 'regxdgxdg',
-//                 UserId: 'abc'
-// },
-// {
-//   Id: '03',
-//     Name: 'hari',
-//       Date: new Date('Thu Aug 08 2019 00:00:00 GMT+0530 (India Standard Time)'),
-//         Type: 'Paid',
-//           Category: 'Expenses',
-//             Amount: 1000,
-//               Description: 'regxdgxdg',
-//                 UserId: 'abc'
-// },
-// {
-//   Id: '04',
-//     Name: 'hari',
-//       Date: new Date('Thu Aug 08 2019 00:00:00 GMT+0530 (India Standard Time)'),
-//         Type: 'Paid',
-//           Category: 'Expenses',
-//             Amount: 1000,
-//               Description: 'regxdgxdg',
-//                 UserId: 'abc'
-// }

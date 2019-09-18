@@ -52,26 +52,6 @@ export class AccDashPage implements OnInit {
 
   addStatement() {
     this.route.navigate(['home', 'add']);
-    // this.modalCtrl.create({
-    //   component: AddTransactionComponent
-    // }).then(
-    //   transacPage => {
-    //     transacPage.present();
-    //     return transacPage.onDidDismiss();
-    //   }
-    // ).then(
-    //   pageResponse => {
-    //     this.transacSub = this.accdashService.transactions.subscribe(
-    //       (Transactions) => {
-    //         this.transactions = Transactions;
-    //       }
-    //     );
-    //   }
-    // )
-  }
-
-  onEdit() {
-
   }
 
   ngOnDestroy() {

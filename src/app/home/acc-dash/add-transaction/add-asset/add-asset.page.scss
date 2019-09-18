@@ -1,0 +1,55 @@
+ion-card-content {
+    padding: 0px 0px 0px 0px;
+}
+
+ion-grid {
+    padding: 0px 0px 0px 0px;
+    width: 100%;
+
+    >ion-row {
+
+        >ion-col {
+
+            border-bottom: 1px solid var(--ion-color-step-550, #737373);
+            padding: 0px 0px 0px 0px;
+
+            input,
+            textarea {
+                height: 100%;
+                width: 100%;
+                padding: 0px 0px 0px 10px;
+                border: 0px;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            >ion-row {
+                height: 100%;
+            }
+        }
+
+        >ion-col:first-child {
+            border-right: 1px solid var(--ion-color-step-550, #737373);
+        }
+    }
+
+    >ion-row:last-child {
+
+        ion-col {
+            border-bottom: none;
+        }
+
+        ion-col:first-child {
+            border-right: 0px;
+
+            ion-item {
+
+                ion-button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

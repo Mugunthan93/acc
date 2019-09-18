@@ -46,23 +46,23 @@ export class AddTransactionPage implements OnInit {
   }
 
   onAddTransaction() {
-    this.accdashService.addTransaction(
-      '06',
-      this.addTransaction.value.tabledata.Name,
-      this.addTransaction.value.tabledata.Date,
-      this.addTransaction.value.tabledata.Type,
-      this.addTransaction.value.tabledata.Category,
-      this.addTransaction.value.tabledata.Amount,
-      this.addTransaction.value.otherdata.Description,
-      'abc'
-    );
-    this.modalCtrl.dismiss();
-    this.loadingCtrl.create({
-      message: 'Transaction adding...'
-    }).then((loadingEl) => {
-      loadingEl.present();
-      return loadingEl.onDidDismiss();
-    });
+    // this.accdashService.addTransaction(
+    //   '06',
+    //   this.addTransaction.value.tabledata.Name,
+    //   this.addTransaction.value.tabledata.Date,
+    //   this.addTransaction.value.tabledata.Type,
+    //   this.addTransaction.value.tabledata.Category,
+    //   this.addTransaction.value.tabledata.Amount,
+    //   this.addTransaction.value.otherdata.Description,
+    //   'abc'
+    // );
+    // this.modalCtrl.dismiss();
+    // this.loadingCtrl.create({
+    //   message: 'Transaction adding...'
+    // }).then((loadingEl) => {
+    //   loadingEl.present();
+    //   return loadingEl.onDidDismiss();
+    // });
   }
 
 }

@@ -8,6 +8,9 @@ import { IonicModule } from '@ionic/angular';
 import { AddIncomePage } from './add-income.page';
 import { AngMaterialModule } from 'src/app/ang-material/ang-material.module';
 
+
+import { Contacts } from '@ionic-native/contacts/ngx';
+
 const routes: Routes = [
   {
     path: '',
@@ -24,6 +27,7 @@ const routes: Routes = [
     AngMaterialModule,
     RouterModule.forChild(routes)
   ],
+  providers: [Contacts],
   declarations: [AddIncomePage]
 })
 export class AddIncomePageModule { }

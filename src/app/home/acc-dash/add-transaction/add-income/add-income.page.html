@@ -1,11 +1,11 @@
 <ion-card>
   <ion-card-content>
-    <form [formGroup]="addIncome">
+    <form [formGroup]="addIncome" (ngSubmit)="onAddIncome()">
       <ion-grid>
         <!--Date field-->
         <ion-row class="date">
           <ion-col size="4">
-            <ion-item>
+            <ion-item lines="none">
               <ion-label>Date</ion-label>
             </ion-item>
           </ion-col>
@@ -24,7 +24,7 @@
         <!--Type field-->
         <ion-row class="type">
           <ion-col size="4">
-            <ion-item>
+            <ion-item lines="none">
               <ion-label>Type</ion-label>
             </ion-item>
           </ion-col>
@@ -35,36 +35,59 @@
                   class="example-radio-group">
                   <mat-radio-button class="example-radio-button" *ngFor="let type of incomeType" [value]="type">
                     <ion-col size="4">
-                      {{type}}</ion-col>
+                      <ion-label>
+                        {{type}}
+                      </ion-label>
+                    </ion-col>
                   </mat-radio-button>
                 </mat-radio-group>
               </ion-col>
             </ion-row>
           </ion-col>
         </ion-row>
+        <!--Name field-->
         <ion-row class="name">
           <ion-col size="4">
-            <ion-item>
+            <ion-item lines="none">
               <ion-label>Name</ion-label>
             </ion-item>
           </ion-col>
           <ion-col size="8">
-            <mat-form-field>
-              <input type="text" matInput formControlName="Name">
-            </mat-form-field>
+            <input type="text" formControlName="Name">
           </ion-col>
         </ion-row>
+        <!--Amount field-->
         <ion-row class="amount">
           <ion-col size="4">
-            Date
+            <ion-item>
+              <ion-label lines="none">
+                Amount
+              </ion-label>
+            </ion-item>
           </ion-col>
           <ion-col size="8">
-            Date
+            <input type="number" formControlName="Amount">
           </ion-col>
         </ion-row>
+        <!--Description field-->
+        <ion-row class="description">
+          <ion-col size="4">
+            <ion-item lines="none" position="fixed">
+              <ion-label>
+                Description
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="8">
+            <textarea cols="30" rows="10" formControlName="Description"></textarea>
+          </ion-col>
+        </ion-row>
+        <!--Submit button-->
         <ion-row class="submit">
-          <ion-col size="12">
-            Date
+          <ion-col size="12" title="button">
+            <ion-item lines="none">
+              <ion-button type="submit" color="primary" expand="block">submit</ion-button>
+            </ion-item>
           </ion-col>
         </ion-row>
       </ion-grid>

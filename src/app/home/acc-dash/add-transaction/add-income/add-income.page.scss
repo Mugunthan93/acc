@@ -7,64 +7,53 @@ ion-grid {
     width: 100%;
 
     >ion-row {
+
         >ion-col {
+
             border-bottom: 1px solid var(--ion-color-step-550, #737373);
             padding: 0px 0px 0px 0px;
+
+            input,
+            textarea {
+                height: 100%;
+                width: 100%;
+                padding: 0px 0px 0px 10px;
+                border: 0px;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            >ion-row {
+                height: 100%;
+            }
         }
 
         >ion-col:first-child {
             border-right: 1px solid var(--ion-color-step-550, #737373);
-        }
 
-        >ion-row:last-child {
-            ion-col {
-                border-bottom: none;
-            }
-
-            ion-col:first-child {
-                border-right: 1px solid var(--ion-color-step-550, #737373);
+            >ion-item {
+                height: 100%;
             }
         }
+    }
 
-        >ion-col {
-            >ion-row {
-                >ion-col {
-                    padding: 0px 0px 0px 0px;
+    >ion-row:last-child {
 
-                    input {
-                        height: 100%;
-                        width: 100%;
-                        outline: none;
-                        padding: 0px 0px 0px 10px;
-                        border: 0px;
+        ion-col {
+            border-bottom: none;
+        }
 
-                        &:focus {
-                            outline: none;
-                        }
-                    }
+        ion-col:first-child {
+            border-right: 0px;
+
+            ion-item {
+
+                ion-button {
+                    width: 100%;
                 }
             }
         }
-    }
-
-    >.type {
-        ion-col:last-child {
-            mat-radio-group {
-                width: 100%;
-
-            }
-        }
-    }
-}
-
-input {
-    height: 100%;
-    width: 100%;
-    outline: none;
-    padding: 0px 0px 0px 10px;
-    border: 0px;
-
-    &:focus {
-        outline: none;
     }
 }
