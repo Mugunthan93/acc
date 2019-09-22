@@ -4,30 +4,47 @@
       <ion-menu-button menu="home"></ion-menu-button>
     </ion-buttons>
     <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="funnel" (click)="onPopoverSorting()"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item no-padding no-margin>
-    <ion-col no-padding>Date</ion-col>
-    <ion-col no-padding>Name</ion-col>
-    <ion-col no-padding>
+
+  <ion-item class="ion-no-padding ion-no-margin">
+    <ion-col class="ion-no-padding">Date</ion-col>
+    <ion-col class="ion-no-padding">Name</ion-col>
+    <ion-col class="ion-no-padding">
       Category
     </ion-col>
-    <ion-col no-padding>Amount</ion-col>
+    <ion-col class="ion-no-padding">Amount</ion-col>
   </ion-item>
+
+  <ion-list *ngIf="transactions.length == 0">
+    <ion-row>
+      <ion-col size="3" offset="3">
+        <ion-item lines="none">
+          <ion-spinner name="crescent"></ion-spinner>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
   <ion-list *ngFor="let transaction of transactions">
-    <ion-text lines="none" *ngIf="transactions.length <= 0">
-      Create a New Transaction
-    </ion-text>
     <ion-item-sliding *ngIf="transactions.length > 0">
-      <ion-item no-padding no-margin>
-        <ion-col no-padding>{{transaction.Date | date : 'shortDate'}}</ion-col>
-        <ion-col no-padding>{{transaction.Name}}</ion-col>
-        <ion-col no-padding>
-          <ion-badge>{{transaction.Category}}</ion-badge>
-        </ion-col>
-        <ion-col no-padding>{{transaction.Amount | currency:'INR'}}</ion-col>
+      <ion-item class="ion-no-padding ion-no-margin">
+        <ion-row class="ion-align-items-center transactionItem">
+          <ion-col size="3" class="ion-no-padding">{{transaction.Date | date : 'shortDate'}}
+          </ion-col>
+          <ion-col size="3" class="ion-no-padding">{{transaction.Name}}</ion-col>
+          <ion-col size="3" class="ion-no-padding">
+            <ion-badge>{{transaction.Category}}</ion-badge>
+          </ion-col>
+          <ion-col size="3" class="ion-no-padding">{{transaction.Amount | currency:'INR'}}</ion-col>
+        </ion-row>
       </ion-item>
       <ion-item-options>
         <ion-item-option (click)="favorite(item)" slots="icon-only">

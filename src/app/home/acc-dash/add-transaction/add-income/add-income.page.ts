@@ -35,19 +35,18 @@ export class AddIncomePage implements OnInit {
 
   onAddIncome() {
     console.log(this.addIncome.value);
-    this.accdashService.addTransaction(
-      this.addIncome.value.Name,
-      this.addIncome.value.Date,
-      this.addIncome.value.Type,
-      "income",
-      this.addIncome.value.Amount,
-      this.addIncome.value.Description
-    );
     this.loadingCtrl.create({
       message: 'Transaction adding...'
     }).then((loadingEl) => {
       loadingEl.present();
-      return loadingEl.onDidDismiss();
+      this.accdashService.addTransaction(
+        this.addIncome.value.Name,
+        this.addIncome.value.Date,
+        this.addIncome.value.Type,
+        "income",
+        this.addIncome.value.Amount,
+        this.addIncome.value.Description
+      );
     });
   }
 

@@ -12,7 +12,7 @@ export class AddExpensePage implements OnInit {
 
   addIncome: FormGroup;
 
-  incomeType = ["active", "passive", "portfolio"];
+  incomeType = ["Fixed", "Variable", "Occasional/Periodic", "Non-Mandatory"];
 
   constructor(
     private accdashService: AccDashService,
@@ -22,7 +22,7 @@ export class AddExpensePage implements OnInit {
   ngOnInit() {
     this.addIncome = new FormGroup({
       'Date': new FormControl(null),
-      'Type': new FormControl("active"),
+      'Type': new FormControl("Fixed"),
       'Name': new FormControl(null),
       'Amount': new FormControl(null),
       'Description': new FormControl(null)

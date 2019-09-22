@@ -1,4 +1,4 @@
-export class Transactions {
+export class Transaction {
     constructor(
         public Id: string,
         public Name: string,
@@ -7,6 +7,16 @@ export class Transactions {
         public Category: string,
         public Amount: number,
         public Description: string,
+        public UserId: string
+    ) {
+
+    }
+}
+
+export class Friend {
+    constructor(
+        public Id: string,
+        public Name: string,
         public UserId: string
     ) {
 

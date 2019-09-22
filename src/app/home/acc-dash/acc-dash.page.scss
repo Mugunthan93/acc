@@ -2,3 +2,24 @@ ion-list {
     padding-top: 0px;
     padding-bottom: 0px;
 }
+
+ion-item {
+    --padding-end: 0px !important;
+}
+
+.transactionItem {
+
+    width: 100%;
+
+    >ion-col {
+        height: 100%;
+    }
+}
+
+.custom-skeleton ion-skeleton-text {
+    line-height: 13px;
+}
+
+.custom-skeleton ion-skeleton-text:last-child {
+    margin-bottom: 5px;
+}

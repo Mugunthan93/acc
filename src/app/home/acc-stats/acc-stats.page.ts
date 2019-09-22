@@ -45,4 +45,8 @@ export class AccStatsPage implements OnInit {
     });
   }
 
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
+
 }

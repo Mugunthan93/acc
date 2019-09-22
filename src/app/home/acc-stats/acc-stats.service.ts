@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { AccDashService } from '../acc-dash/acc-dash.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AccStatsService {
 
   constructor(
-    private authService: AuthService,
-    private http: HttpClient,
+    private accdashService: AccDashService
   ) { }
 
 

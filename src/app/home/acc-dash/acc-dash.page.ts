@@ -1,28 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
-import { Transactions } from './acc-dash.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Transaction } from './acc-dash.model';
 import { AccDashService } from './acc-dash.service';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { SortingComponent } from './sorting/sorting.component';
 
 @Component({
   selector: 'app-acc-dash',
   templateUrl: './acc-dash.page.html',
   styleUrls: ['./acc-dash.page.scss'],
 })
-export class AccDashPage implements OnInit {
+export class AccDashPage implements OnInit, OnDestroy {
 
-  transactions: Transactions[];
+  transactions: Transaction[];
   private transacSub: Subscription;
   total: number = 0;
 
   constructor(
-    private modalCtrl: ModalController,
     private accdashService: AccDashService,
-    private loadingCtrl: LoadingController,
-    private authService: AuthService,
-    private route: Router
+    private route: Router,
+    private popoverController: PopoverController
   ) {
 
   }
@@ -30,6 +28,7 @@ export class AccDashPage implements OnInit {
   ngOnInit() {
     this.transacSub = this.accdashService.transactions.subscribe(
       (Transactions) => {
+        console.log(Transactions);
         this.transactions = Transactions;
         let totalTransaction: number = 0;
         for (const key in Transactions) {
@@ -44,14 +43,34 @@ export class AccDashPage implements OnInit {
 
   ionViewWillEnter() {
     this.accdashService.fetchTransactions().subscribe(
-      resData => {
-        console.log(resData);
+      Transactions => {
+        this.transactions = Transactions;
       }
     );
   }
 
   addStatement() {
     this.route.navigate(['home', 'add']);
+  }
+
+  onPopoverSorting() {
+    this.popoverController.create({
+      component: SortingComponent,
+      translucent: true
+    }).then(
+      (popOverEl) => {
+        popOverEl.present();
+      }
+    );
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   ngOnDestroy() {

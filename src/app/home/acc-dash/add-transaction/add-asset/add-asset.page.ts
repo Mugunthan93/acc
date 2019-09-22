@@ -12,7 +12,7 @@ export class AddAssetPage implements OnInit {
 
   addIncome: FormGroup;
 
-  incomeType = ["active", "passive", "portfolio"];
+  incomeType = ["Convertable", "Non-Convertable", "Tangible", "Intagible", "Operating", "Non-Operating"];
 
   constructor(
     private accdashService: AccDashService,

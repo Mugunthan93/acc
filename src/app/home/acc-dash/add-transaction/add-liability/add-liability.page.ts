@@ -12,9 +12,7 @@ export class AddLiabilityPage implements OnInit {
 
   addIncome: FormGroup;
 
-  myContacts: Contact[];
-
-  incomeType = ["active", "passive", "portfolio"];
+  incomeType = ["Long-Term", "Short-term", "Others"];
 
   constructor(
     private accdashService: AccDashService,
